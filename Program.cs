@@ -60,8 +60,8 @@ namespace HG_WebScraper
                     var listing = doc.DocumentNode.SelectNodes("//*[@class='row product-listing']");
                     foreach (HtmlNode item in listing)
                     {
-                        var subCategory = item.SelectSingleNode(".//preceding::div[@class='product-catalog-second-category']")?.InnerText;
-                        var category= item.SelectSingleNode(".//preceding::div[@class='product-catalog-category product-category-divider']")?.InnerText; 
+                        var subCategory = item.SelectSingleNode("(.//preceding::div[@class='product-catalog-second-category'])[last()]")?.InnerText;
+                        var category= item.SelectSingleNode("(.//preceding::div[@class='product-catalog-category product-category-divider'])[last()]")?.InnerText; 
                         var detailsNode = item.SelectSingleNode(".//*[@class='product-details']");
 
                         var rows = item.SelectNodes(".//tbody/tr");

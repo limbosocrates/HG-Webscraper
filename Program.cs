@@ -63,6 +63,8 @@ namespace HG_WebScraper
                         var subCategory = item.SelectSingleNode("(.//preceding::div[@class='product-catalog-second-category'])[last()]")?.InnerText;
                         var category= item.SelectSingleNode("(.//preceding::div[@class='product-catalog-category product-category-divider'])[last()]")?.InnerText; 
                         var detailsNode = item.SelectSingleNode(".//*[@class='product-details']");
+                        var from = detailsNode.SelectSingleNode("./h5/a")?.InnerText;
+                        var organic = detailsNode.SelectSingleNode("./p/span")?.InnerText;
 
                         var rows = item.SelectNodes(".//tbody/tr");
                         foreach (var row in rows)
@@ -70,7 +72,7 @@ namespace HG_WebScraper
                             var descNode = row.SelectSingleNode("./th/div/a");
                             if (descNode == null) continue;
                             var priceNode = row.SelectSingleNode(".//span");
-                            string line = $"{category};{subCategory};{detailsNode.FirstChild.InnerText};{descNode.InnerText};{priceNode.InnerText}";
+                            string line = $"{category};{subCategory};{detailsNode.FirstChild.InnerText};{from};{organic};{descNode.InnerText};{priceNode.InnerText}";
                             line=WebUtility.HtmlDecode(line);
                             //Console.WriteLine(line);
                             output.WriteLine(line);
